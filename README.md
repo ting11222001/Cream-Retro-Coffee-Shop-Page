@@ -94,4 +94,4 @@ The `CLAUDE.md` can be manually written by me, but it has to be a well-structure
 
 ## Acknowledgement
 
-Inpired by [Nate Herk](https://www.youtube.com/watch?v=86HM0RUWhCk).
+Inspired by [Nate Herk](https://www.youtube.com/watch?v=86HM0RUWhCk), and [Cream Retro Playful Coffee Shop Brand Guideline](https://www.canva.com/templates/EAGqJRLKn8g-cream-retro-playful-coffee-shop-brand-guideline-a4-document/).
