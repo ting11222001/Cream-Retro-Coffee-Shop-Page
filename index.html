@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rimberio Coffee — Good Vibes & Great Brews</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --cream: #E8E6D8;
+      --cream-dark: #D9D6C4;
+      --sky-blue: #91A6EB;
+      --rust: #892F2A;
+      --rust-light: #A84040;
+      --gold: #8DAF62;
+      --dark: #2C1A14;
+      --dark-mid: #3D2318;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Grain texture overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    .font-display {
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--dark);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(232, 230, 216, 0.08);
+    }
+
+    .nav-logo img {
+      height: 44px;
+      width: auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(232, 230, 216, 0.75);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0; right: 100%;
+      height: 1.5px;
+      background: var(--sky-blue);
+      transition: right 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+    .nav-links a:hover::after { right: 0; }
+
+    .nav-cta {
+      background: var(--rust);
+      color: var(--cream) !important;
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      transition: background 0.2s ease, transform 0.15s ease !important;
+    }
+    .nav-cta:hover { background: var(--rust-light) !important; transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0); }
+    .nav-cta::after { display: none !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 2.5rem 4rem;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 75% 40%, rgba(145, 166, 235, 0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 20% 70%, rgba(137, 175, 98, 0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 85% 80%, rgba(137, 47, 42, 0.08) 0%, transparent 50%);
+      z-index: 0;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-text {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 2rem;
+      height: 1.5px;
+      background: var(--rust);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title .accent {
+      color: var(--rust);
+      font-style: italic;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      line-height: 1.7;
+      color: rgba(44, 26, 20, 0.65);
+      max-width: 420px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--rust);
+      color: var(--cream);
+      padding: 0.875rem 2rem;
+      border-radius: 100px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      box-shadow:
+        0 4px 16px rgba(137, 47, 42, 0.25),
+        0 1px 4px rgba(137, 47, 42, 0.15);
+      transition: background 0.2s ease, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: var(--rust-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(137, 47, 42, 0.3), 0 2px 8px rgba(137, 47, 42, 0.2);
+    }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--dark);
+      font-size: 0.9rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.875rem 0.5rem;
+      border-bottom: 1.5px solid var(--dark);
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .btn-ghost:hover { color: var(--rust); border-color: var(--rust); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--rust); outline-offset: 3px; }
+
+    .hero-visual {
+      position: relative;
+    }
+
+    .hero-img-wrap {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow:
+        0 32px 64px rgba(44, 26, 20, 0.18),
+        0 8px 24px rgba(44, 26, 20, 0.12),
+        0 2px 6px rgba(44, 26, 20, 0.08);
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 26, 20, 0.55) 0%, transparent 50%);
+    }
+
+    .hero-img-badge {
+      position: absolute;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 2;
+      background: rgba(232, 230, 216, 0.92);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 1rem 1.25rem;
+      box-shadow: 0 4px 16px rgba(44, 26, 20, 0.15);
+    }
+
+    .hero-img-badge .badge-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--rust);
+      line-height: 1;
+    }
+
+    .hero-img-badge .badge-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: rgba(44, 26, 20, 0.6);
+      text-transform: uppercase;
+      margin-top: 0.125rem;
+    }
+
+    .hero-float-tag {
+      position: absolute;
+      top: 2rem;
+      right: -1rem;
+      background: var(--sky-blue);
+      color: var(--dark);
+      border-radius: 100px;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      box-shadow: 0 4px 12px rgba(145, 166, 235, 0.4);
+      transform: rotate(3deg);
+      white-space: nowrap;
+    }
+
+    /* ─── ABOUT STRIP ─── */
+    .about-strip {
+      background: var(--rust);
+      padding: 1.5rem 2.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .strip-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--cream);
+    }
+
+    .strip-icon {
+      font-size: 1.25rem;
+      opacity: 0.9;
+    }
+
+    .strip-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── MENU SECTION ─── */
+    .section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      margin-bottom: 3.5rem;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--dark);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--rust);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .menu-card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 20px rgba(44, 26, 20, 0.07),
+        0 1px 4px rgba(44, 26, 20, 0.05);
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 16px 40px rgba(44, 26, 20, 0.12),
+        0 4px 12px rgba(44, 26, 20, 0.08);
+    }
+
+    .menu-card:focus-visible {
+      outline: 2px solid var(--rust);
+      outline-offset: 3px;
+    }
+
+    .menu-card:active { transform: translateY(-2px); }
+
+    .menu-card-img {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+    }
+
+    .menu-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .menu-card:hover .menu-card-img img {
+      transform: scale(1.05);
+    }
+
+    .menu-card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 26, 20, 0.4) 0%, transparent 60%);
+    }
+
+    .menu-card-tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1;
+      background: var(--cream);
+      color: var(--rust);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+    }
+
+    .menu-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+
+    .menu-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-card-desc {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(44, 26, 20, 0.6);
+    }
+
+    /* ─── COMMUNITY ─── */
+    .community-section {
+      background: var(--dark);
+      padding: 6rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .community-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 20%, rgba(145, 166, 235, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(137, 47, 42, 0.12) 0%, transparent 50%);
+    }
+
+    .community-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .community-section .section-eyebrow {
+      color: var(--sky-blue);
+    }
+
+    .community-section .section-title {
+      color: var(--cream);
+    }
+
+    .community-body {
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      color: rgba(232, 230, 216, 0.65);
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .community-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-block {
+      background: rgba(232, 230, 216, 0.06);
+      border: 1px solid rgba(232, 230, 216, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: var(--cream);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-num span {
+      color: var(--sky-blue);
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: rgba(232, 230, 216, 0.5);
+    }
+
+    .community-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+
+    .photo-card {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-card:first-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 16/7;
+    }
+
+    .photo-card:not(:first-child) {
+      aspect-ratio: 4/3;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card:hover img { transform: scale(1.04); }
+
+    .photo-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(44, 26, 20, 0.5) 0%, transparent 50%);
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials-section {
+      padding: 6rem 2.5rem;
+      background: var(--cream-dark);
+    }
+
+    .testimonials-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3.5rem;
+    }
+
+    .testimonial-card {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow:
+        0 4px 20px rgba(44, 26, 20, 0.07),
+        0 1px 4px rgba(44, 26, 20, 0.04);
+      position: relative;
+    }
+
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: rgba(137, 47, 42, 0.12);
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-weight: 900;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 0.2rem;
+      margin-bottom: 1rem;
+      color: var(--gold);
+      font-size: 0.875rem;
+    }
+
+    .testimonial-text {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: rgba(44, 26, 20, 0.75);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .testimonial-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: var(--cream-dark);
+      flex-shrink: 0;
+    }
+
+    .testimonial-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .testimonial-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .testimonial-role {
+      font-size: 0.75rem;
+      color: rgba(44, 26, 20, 0.5);
+      margin-top: 0.125rem;
+    }
+
+    /* ─── VISIT ─── */
+    .visit-section {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .visit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+
+    .visit-map {
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--cream-dark);
+      position: relative;
+      box-shadow:
+        0 8px 32px rgba(44, 26, 20, 0.1),
+        0 2px 8px rgba(44, 26, 20, 0.06);
+    }
+
+    .visit-map img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .visit-map-pin {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+      background: var(--rust);
+      color: var(--cream);
+      width: 48px;
+      height: 48px;
+      border-radius: 50% 50% 50% 0;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(137, 47, 42, 0.4);
+    }
+
+    .visit-map-pin span {
+      transform: rotate(45deg);
+      font-size: 1.25rem;
+    }
+
+    .visit-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .visit-detail-block {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .visit-detail-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(137, 47, 42, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .visit-detail-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--rust);
+      margin-bottom: 0.4rem;
+    }
+
+    .visit-detail-value {
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: rgba(44, 26, 20, 0.75);
+    }
+
+    /* ─── NEWSLETTER ─── */
+    .newsletter-section {
+      background: var(--sky-blue);
+      padding: 5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 40% 80% at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 80% at 80% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    }
+
+    .newsletter-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
+    .newsletter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 2.75rem);
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .newsletter-sub {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(44, 26, 20, 0.65);
+      margin-bottom: 2.5rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.75rem;
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      background: rgba(255,255,255,0.7);
+      border: 1.5px solid rgba(44, 26, 20, 0.15);
+      border-radius: 100px;
+      padding: 0.875rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark);
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      backdrop-filter: blur(4px);
+    }
+
+    .newsletter-input::placeholder { color: rgba(44, 26, 20, 0.45); }
+    .newsletter-input:focus {
+      border-color: var(--rust);
+      background: rgba(255,255,255,0.9);
+    }
+
+    .newsletter-btn {
+      background: var(--rust);
+      color: var(--cream);
+      border: none;
+      border-radius: 100px;
+      padding: 0.875rem 1.5rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(137, 47, 42, 0.3);
+      transition: background 0.2s ease, transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .newsletter-btn:hover { background: var(--rust-light); transform: translateY(-1px); }
+    .newsletter-btn:active { transform: translateY(0); }
+    .newsletter-btn:focus-visible { outline: 2px solid var(--dark); outline-offset: 3px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      padding: 3.5rem 2.5rem;
+      color: var(--cream);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo img { height: 36px; filter: brightness(3) saturate(0); opacity: 0.75; }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(232, 230, 216, 0.5);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover { color: var(--cream); }
+    .footer-links a:focus-visible { outline: 1px solid var(--cream); outline-offset: 3px; }
+
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(232, 230, 216, 0.35);
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatBadge {
+      0%, 100% { transform: rotate(3deg) translateY(0); }
+      50% { transform: rotate(3deg) translateY(-6px); }
+    }
+
+    .hero-float-tag { animation: floatBadge 3s ease-in-out infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Only hide when JS is ready and observer is attached */
+    .reveal-ready {
+      opacity: 0;
+      transform: translateY(32px);
+    }
+    .reveal-ready.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-content,
+      .community-inner,
+      .visit-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .community-photos { display: none; }
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .menu-grid { grid-template-columns: 1fr; }
+      .community-stats { grid-template-columns: 1fr 1fr; }
+      .newsletter-form { flex-direction: column; }
+      .about-strip { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo" aria-label="Rimberio Coffee home">
+      <img src="brand_assets/logo.png" alt="Rimberio Coffee" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#community">Our Story</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a href="#community" class="nav-cta">Order Now</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <span class="hero-eyebrow">Modern Filipino Coffee</span>
+        <h1 class="hero-title">
+          Good Vibes &<br />
+          <em>Great Brews</em>
+        </h1>
+        <p class="hero-subtitle">
+          A cozy corner where Filipino coffee culture meets community.
+          Every cup is brewed with heart, every visit feels like home.
+        </p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-primary">
+            Explore Menu
+            <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#community" class="btn-ghost">
+            Our Story
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-img-wrap">
+          <img src="https://placehold.co/600x750/3D2318/E8E6D8?text=." alt="Rimberio Coffee shop interior" />
+          <div class="hero-img-badge">
+            <div class="badge-num">★ 4.9</div>
+            <div class="badge-label">Community Fave</div>
+          </div>
+        </div>
+        <div class="hero-float-tag">☕ Fresh Roasted Daily</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip">
+    <div class="strip-item">
+      <span class="strip-icon">✦</span>
+      <span class="strip-text">Locally Sourced Beans</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-icon">✦</span>
+      <span class="strip-text">Filipino Heritage Roasts</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-icon">✦</span>
+      <span class="strip-text">Community First</span>
+    </div>
+    <div class="strip-item">
+      <span class="strip-icon">✦</span>
+      <span class="strip-text">Sustainably Grown</span>
+    </div>
+  </div>
+
+  <!-- MENU SECTION -->
+  <div style="background: var(--cream);">
+    <div class="section" id="menu">
+      <div class="section-header reveal">
+        <div class="section-eyebrow">✦ What We Brew</div>
+        <h2 class="section-title">Crafted with <em>Love</em></h2>
+      </div>
+
+      <div class="menu-grid">
+        <a href="#" class="menu-card reveal" style="transition-delay: 0.05s">
+          <div class="menu-card-img">
+            <span class="menu-card-tag">Signature</span>
+            <img src="https://placehold.co/480x360/3D2318/E8E6D8?text=." alt="Barako Latte" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Barako Latte</div>
+            <div class="menu-card-desc">Rich, bold Kapeng Barako meets velvety steamed milk — a Filipino classic reimagined.</div>
+          </div>
+        </a>
+        <a href="#" class="menu-card reveal" style="transition-delay: 0.1s">
+          <div class="menu-card-img">
+            <span class="menu-card-tag">Popular</span>
+            <img src="https://placehold.co/480x360/8DAF62/E8E6D8?text=." alt="Pandan Cold Brew" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Pandan Cold Brew</div>
+            <div class="menu-card-desc">Slow-steeped cold brew infused with fragrant pandan leaf. Cool, earthy, and uniquely ours.</div>
+          </div>
+        </a>
+        <a href="#" class="menu-card reveal" style="transition-delay: 0.15s">
+          <div class="menu-card-img">
+            <span class="menu-card-tag">Seasonal</span>
+            <img src="https://placehold.co/480x360/892F2A/E8E6D8?text=." alt="Ube Espresso Tonic" />
+          </div>
+          <div class="menu-card-body">
+            <div class="menu-card-name">Ube Espresso Tonic</div>
+            <div class="menu-card-desc">Vibrant ube cream floated over a fizzy espresso tonic — your feed will love this one.</div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMMUNITY SECTION -->
+  <section class="community-section" id="community">
+    <div class="community-inner">
+      <div>
+        <div class="section-eyebrow">✦ Who We Are</div>
+        <h2 class="section-title">More Than a<br /><em style="color: var(--sky-blue)">Coffee Shop</em></h2>
+        <p class="community-body">
+          Rimberio Coffee was born out of a love for Philippine coffee culture —
+          the rich flavors, the unhurried mornings, and the warmth of gathering together.
+          We believe every cup is a conversation starter, and our space is built to hold those moments.
+        </p>
+        <div class="community-stats reveal">
+          <div class="stat-block">
+            <div class="stat-num">5<span>+</span></div>
+            <div class="stat-label">Years Brewing</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num">12<span>k</span></div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num">8<span></span></div>
+            <div class="stat-label">Origin Beans</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-num">100<span>%</span></div>
+            <div class="stat-label">Local Partners</div>
+          </div>
+        </div>
+      </div>
+      <div class="community-photos reveal">
+        <div class="photo-card">
+          <img src="https://placehold.co/800x350/3D2318/E8E6D8?text=." alt="Community gathering at Rimberio" />
+        </div>
+        <div class="photo-card">
+          <img src="https://placehold.co/400x300/8DAF62/E8E6D8?text=." alt="Barista at work" />
+        </div>
+        <div class="photo-card">
+          <img src="https://placehold.co/400x300/91A6EB/E8E6D8?text=." alt="Coffee beans being roasted" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials-section">
+    <div class="testimonials-inner">
+      <div class="section-header reveal">
+        <div class="section-eyebrow" style="color: var(--rust)">✦ Regulars Say</div>
+        <h2 class="section-title">Loved by the <em>Community</em></h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal" style="transition-delay: 0.05s">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"This place feels like a warm hug. The Barako Latte is unlike anything I've had — it actually tastes like home."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/E8E6D8/892F2A?text=M" alt="Maria" />
+            </div>
+            <div>
+              <div class="testimonial-name">Maria Santos</div>
+              <div class="testimonial-role">Regular since 2021</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal" style="transition-delay: 0.1s">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I brought my whole barkada here and now it's our weekly spot. Great vibes, great coffee, wonderful people."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/E8E6D8/8DAF62?text=J" alt="Juan" />
+            </div>
+            <div>
+              <div class="testimonial-name">Juan dela Cruz</div>
+              <div class="testimonial-role">Coffee Enthusiast</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card reveal" style="transition-delay: 0.15s">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Pandan Cold Brew is hands-down the most creative drink I've ever had. Can't believe it's only 20 minutes from my house!"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">
+              <img src="https://placehold.co/80x80/E8E6D8/91A6EB?text=A" alt="Ana" />
+            </div>
+            <div>
+              <div class="testimonial-name">Ana Reyes</div>
+              <div class="testimonial-role">Food Blogger</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT SECTION -->
+  <section style="background: var(--cream);">
+    <div class="visit-section" id="visit">
+      <div class="section-header reveal">
+        <div class="section-eyebrow" style="color: var(--rust)">✦ Find Us</div>
+        <h2 class="section-title">Come Say <em>Hello</em></h2>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-map reveal">
+          <img src="https://placehold.co/600x450/D9D6C4/892F2A?text=Map+Coming+Soon" alt="Map to Rimberio Coffee" />
+          <div class="visit-map-pin"><span>📍</span></div>
+        </div>
+        <div class="visit-info reveal">
+          <div class="visit-detail-block">
+            <div class="visit-detail-icon">📍</div>
+            <div>
+              <div class="visit-detail-label">Address</div>
+              <div class="visit-detail-value">123 Katipunan Avenue<br />Quezon City, Metro Manila<br />Philippines 1108</div>
+            </div>
+          </div>
+          <div class="visit-detail-block">
+            <div class="visit-detail-icon">🕐</div>
+            <div>
+              <div class="visit-detail-label">Hours</div>
+              <div class="visit-detail-value">Monday – Friday: 7:00 AM – 9:00 PM<br />Saturday – Sunday: 8:00 AM – 10:00 PM</div>
+            </div>
+          </div>
+          <div class="visit-detail-block">
+            <div class="visit-detail-icon">📱</div>
+            <div>
+              <div class="visit-detail-label">Contact</div>
+              <div class="visit-detail-value">+63 912 345 6789<br />hello@rimberio.coffee</div>
+            </div>
+          </div>
+          <div>
+            <a href="#" class="btn-primary" style="display: inline-flex; width: fit-content;">
+              Get Directions
+              <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="newsletter-inner">
+      <h2 class="newsletter-title">Stay in the Loop ☕</h2>
+      <p class="newsletter-sub">New brews, community events, and exclusive offers — straight to your inbox. No spam, just good vibes.</p>
+      <form class="newsletter-form" onsubmit="return false;">
+        <input
+          class="newsletter-input"
+          type="email"
+          placeholder="your@email.com"
+          aria-label="Email address"
+        />
+        <button class="newsletter-btn" type="submit">Join Us</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <a href="#" class="footer-logo" aria-label="Rimberio Coffee" style="text-decoration:none; display:flex; flex-direction:column; gap:1px;">
+        <span style="font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:900; letter-spacing:0.08em; color:var(--cream); opacity:0.85; line-height:1;">RIMBERIO</span>
+        <span style="font-family:'DM Sans',sans-serif; font-size:0.65rem; font-weight:500; letter-spacing:0.18em; text-transform:uppercase; color:rgba(232,230,216,0.45);">coffee</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#community">Story</a></li>
+        <li><a href="#visit">Visit</a></li>
+        <li><a href="#">Instagram</a></li>
+      </ul>
+      <span class="footer-copy">© 2026 Rimberio Coffee. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll-triggered reveal with graceful fallback
+    function initReveal() {
+      const reveals = document.querySelectorAll('.reveal');
+
+      reveals.forEach((el, i) => {
+        const delay = parseFloat(el.style.transitionDelay) || 0;
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(24px)';
+        el.style.transition = `opacity 0.55s ease ${delay}s, transform 0.55s cubic-bezier(0.4,0,0.2,1) ${delay}s`;
+      });
+
+      const show = (el) => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      };
+
+      const observer = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              show(entry.target);
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.01, rootMargin: '0px 0px 60px 0px' }
+      );
+
+      reveals.forEach(el => observer.observe(el));
+
+      // Fallback: after 2s, force-show anything still hidden (for bots/Puppeteer)
+      setTimeout(() => {
+        reveals.forEach(el => {
+          if (el.style.opacity === '0') show(el);
+        });
+      }, 2000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  </script>
+</body>
+</html>
